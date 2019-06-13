@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { View, Dimensions, Image, Text, ScrollView } from "react-native";
+import { View, Dimensions, Image, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { Item, Input, Content, Icon, Fab, Button } from "native-base";
 import { connect } from "react-redux";
+import {  friendRequestAction} from '../../Store/Actions/AppAction'
 class PublicProfileDetail extends Component {
     constructor() {
         super();
         this.state = {
-            active: false
+            active: false,
+            isFriend: false,
         }
     }
     // static navigationOptions = ({ navigation }) => {
@@ -35,6 +37,16 @@ class PublicProfileDetail extends Component {
         this.props.navigation.setParams({
             detailUser: null
         })
+    }
+
+    sendFriendRequest(name,uid){
+        Alert.alert("Send Request to",uid);
+        this.setState({
+            isFriend: true
+        });
+        this.props.sendFriendRequest(name,uid);
+        
+
     }
     render() {
         let userDetail = this.props.navigation.getParam('detailUser');
@@ -105,6 +117,7 @@ class PublicProfileDetail extends Component {
                                 add your tag line
                             </Text>
                         </View>
+
                         <View
                             style={{
                                 flex: 0.5,
@@ -113,17 +126,35 @@ class PublicProfileDetail extends Component {
                                 justifyContent: "space-between"
                             }}
                         >
-                            <View
-                                style={{ flex: 0.2, flexWrap: "wrap", alignSelf: "flex-end" }}
-                            >
 
-                                <Image
-                                    source={require("../../../assets/Message.png")}
-                                    resizeMode="contain"
-                                    style={{ width: width / 14, height: height / 20 }}
-                                />
-                            </View>
-                            <View
+                            {
+                                (this.state.isFriend === false) ?
+                                    <View
+                                        style={{ flex: 0.2, flexWrap: "wrap", alignSelf: "flex-end" }}
+                                    >
+                                        <TouchableOpacity onPress={this.sendFriendRequest.bind(this,userDetail.name,userDetail.uid)}>
+
+                                            <Image
+                                                source={require("../../../assets/add-friend.png")}
+                                                resizeMode="contain"
+                                                style={{ width: width / 4, height: height / 6 }}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                    : 
+                                    <View>
+                                        <Text
+                                        style={{
+                                            fontSize:20,
+                                            color:'#fff'
+                                        }}>
+                                            Request Send
+                                        </Text>
+                                    </View>
+                            }
+
+
+                            {/* <View
                                 style={{ flex: 0.2, flexWrap: "wrap", alignSelf: "flex-end" }}
                             >
 
@@ -157,42 +188,49 @@ class PublicProfileDetail extends Component {
                                     resizeMode="contain"
                                     style={{ width: width / 14, height: height / 20 }}
                                 />
-                            </View>
-                            <View
-                                style={{
-                                    flex: 0.2,
-                                    flexWrap: "wrap",
-                                    alignSelf: "flex-end",
-                                    // marginBottom: 10 
-                                }}
-                            >
-                                <Fab
-                                    active={this.state.active}
-                                    direction="left"
-                                    containerStyle={{backgroundColor:'#fff',width:width/2,height:height/36}}
-                                    style={{ backgroundColor: '#0071ce', }}
-                                    position="bottomRight"
-                                    onPress={() => this.setState({ active: !this.state.active })}>
-                                    <Icon name="share" />
-                                    <Button style={{ backgroundColor: '#34A34F' }}>
-                                        <Icon name="logo-whatsapp" />
-                                    </Button>
-                                    <Button style={{ backgroundColor: '#3B5998' }}>
-                                        <Icon name="logo-facebook" />
-                                    </Button>
-                                    <Button disabled style={{ backgroundColor: '#DD5144' }}>
-                                        <Icon name="mail" />
-                                    </Button>
-                                </Fab>
+                            </View> */}
 
-                                {/* <Image
-                                    source={require("../../../assets/Favorite.png")}
-                                    resizeMode="contain"
-                                    style={{ width: width / 14, height: height / 20 }}
-                                /> */}
-                            </View>
+                            {/* <View
+                                            style={{
+                                                flex: 0.2,
+                                                flexWrap: "wrap",
+                                                alignSelf: "flex-end",
+                                                // marginBottom: 10 
+                                            }}
+                                        >
+                                            <Fab
+                                                active={this.state.active}
+                                                direction="left"
+                                                containerStyle={{ backgroundColor: '#fff', width: width / 2, height: height / 36 }}
+                                                style={{ backgroundColor: '#0071ce', }}
+                                                position="bottomRight"
+                                                onPress={() => this.setState({ active: !this.state.active })}>
+                                                <Icon name="share" />
+                                                <Button style={{ backgroundColor: '#34A34F' }}>
+                                                    <Icon name="logo-whatsapp" />
+                                                </Button>
+                                                <Button style={{ backgroundColor: '#3B5998' }}>
+                                                    <Icon name="logo-facebook" />
+                                                </Button>
+                                                <Button disabled style={{ backgroundColor: '#DD5144' }}>
+                                                    <Icon name="mail" />
+                                                </Button>
+                                            </Fab>
+
+                                            <Image
+                                                source={require("../../../assets/Favorite.png")}
+                                                resizeMode="contain"
+                                                style={{ width: width / 14, height: height / 20 }}
+                                            />
+                                        </View> */}
+
+
+
+
                         </View>
+
                     </View>
+
                     <View style={{ flex: 0.7, flexDirection: "row" }}>
                         <View
                             style={{
@@ -367,7 +405,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        sendFriendRequest:()=> dispatch(friendRequestAction())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PublicProfileDetail);

@@ -9,6 +9,7 @@ import {
   AsyncStorage,
   SafeAreaView
 } from "react-native";
+import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail } from 'native-base';
 const { width, height, scale, fontScale } = Dimensions.get("window");
 import firebase from "react-native-firebase";
 import User from "../SignIn/User";
@@ -152,10 +153,10 @@ class MessageList extends Component {
                 style={{
                   flex: 1,
                   flexDirection: "row",
-                  height: height / 6,
+                  height: height / 4.5,
                   borderBottomColor: "black",
                   borderBottomWidth: 1,
-                  backgroundColor: "#fff",
+                  backgroundColor: "#ffffff",
                   // justifyContent: "center",
                   alignItems: "center"
                 }}
@@ -192,9 +193,10 @@ class MessageList extends Component {
                     borderRadius: 20,
                     marginBottom: 10,
                     marginTop: 10,
-                    alignItems: "center", 
-                    alignContent:'center',
-                    justifyContent:'center'
+                    alignItems: "center",
+                    alignContent: 'center',
+                    justifyContent: 'center',
+                    backgroundColor:'#d3d0d0'
                   }}>
                     <Text
                       style={{
@@ -208,7 +210,23 @@ class MessageList extends Component {
                       }}
                     >
                       {item.userDetail.name}
-                      
+                     
+
+                    </Text>
+                    <Text
+                      style={{
+                        color: "black",
+                        fontSize: width / 20,
+                        paddingLeft: width / 50,
+                        // paddingTop:25,
+                        // alignItems: "center", 
+                        // textAlign: 'left'
+
+                      }}
+                    >
+                      {/* {item.userDetail.name} */}
+                      {item.userDetail.email}
+
                     </Text>
                     {/* <Text style={{ paddingLeft: width / 26 }}>{item.message}</Text> */}
                   </View>
@@ -219,10 +237,11 @@ class MessageList extends Component {
           )}
           keyExtractor={item => item.phone}
         />
-        {/* :null */}
-        {/* } */}
 
+     
       </SafeAreaView>
+
+
     );
   }
 }

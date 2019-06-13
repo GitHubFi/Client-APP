@@ -145,8 +145,10 @@ class GlobalSocial extends Component {
         />
       );
     }
+   
     return (
       <TouchableOpacity
+      key={index}
         style={{
           flex: 1,
           margin: 1
@@ -156,9 +158,10 @@ class GlobalSocial extends Component {
           detailUser: item
         })}
       >
-        <View style={{ flex: 0.4 }}>
+        <View style={{ flex: 0.4 }}
+        >
           <Image
-            // source={{ uri: item.imageUrl }}
+            source={{ uri: "https://assets.rebelcircus.com/blog/wp-content/uploads/2016/05/facebook-avatar.jpg" }}
             style={{ width: width / 3, height: height / 6 }}
           />
         </View>
@@ -172,7 +175,7 @@ class GlobalSocial extends Component {
           <Text
             style={{ fontSize: width / 24, color: "#fff", fontWeight: "bold" }}
           >
-            {item.name}
+            {item.name.toUpperCase()}
           </Text>
           <View style={{ lineHeight: 1 }}>
             <Text style={{ fontSize: width / 36, color: "#fff" }}>
@@ -212,7 +215,12 @@ class GlobalSocial extends Component {
         </View>
       </TouchableOpacity>
     );
+    
+    
+  
   };
+  
+  
   render() {
     console.log(this.props.allUserListComp)
     return (

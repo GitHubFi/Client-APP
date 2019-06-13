@@ -152,14 +152,16 @@ class ChatScreen extends Component {
           // flexDirection: "row",
           width: "90%",
           alignSelf: item.from === this.props.phoneNumber ? "flex-end" : "flex-start",
-          backgroundColor: item.from === this.props.phoneNumber ? "#f0f0f9" : "#3982f7",
+          backgroundColor: item.from === this.props.phoneNumber ? "#e2ffc7" : "#fff",
           borderRadius: 5,
-          marginBottom: 10
+          marginBottom: 10,
+          borderTopRightRadius:-10,
+
         }}
       >
         <Text
           style={{
-            color: "white",
+            color: "black",
             padding: 10,
             fontSize: 16,
             // alignItems: "flex-start"
@@ -170,7 +172,7 @@ class ChatScreen extends Component {
         </Text>
         <Text
           style={{
-            color: "white",
+            color: "#b8d1a5",
             padding: 3,
             fontSize: 12,
             alignItems: "center",

@@ -26,7 +26,7 @@ export default class SplashScreen extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      // this.reset('signIn')
+      //this.reset('signIn')
       this.loadApp();
 
     }, 100)

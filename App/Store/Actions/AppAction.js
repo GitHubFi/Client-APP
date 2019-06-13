@@ -189,3 +189,7 @@ function publicProfileSuccess(data) {
     payload: data
   }
 }
+
+export function friendRequestAction(){
+  
+}

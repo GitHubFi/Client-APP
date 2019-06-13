@@ -34,7 +34,7 @@ const AuthStackNavigator = createStackNavigator(
     ChatScreen:ChatScreen
   },
   {
-    initialRouteName: "app"
+    initialRouteName: "signIn"
   }
 );
 
